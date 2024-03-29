@@ -34,9 +34,12 @@ function Navbar() {
                 </li>
               </Link>
 
+                <Link to="/allproducts">
+                
               <li className="mr-5 hover:text-gray-900 cursor-pointer">
                 All Products
               </li>
+                </Link>
               <li className="mr-5 hover:text-gray-900 cursor-pointer">Mens</li>
               <li className="mr-5 hover:text-gray-900 cursor-pointer">Kids</li>
             </ul>
@@ -51,9 +54,12 @@ function Navbar() {
                   </li>
                 </Link>
 
+                <Link to="/allproducts">
+                
                 <li className="mr-5 hover:text-gray-900 cursor-pointer">
                   All Products
                 </li>
+                </Link>
                 <li className="mr-5 hover:text-gray-900 cursor-pointer">
                   Mens
                 </li>
@@ -71,9 +77,11 @@ function Navbar() {
 }
             
             <div className="flex justify-center items-center gap-3 ">
+              <Link to='/login'>
               <button className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base  md:mt-0">
                 Login
               </button>
+              </Link>
               <Link to="/cart">
                 <FaShoppingCart size={30} />
               </Link>
