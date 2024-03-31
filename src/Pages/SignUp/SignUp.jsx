@@ -1,12 +1,12 @@
 import React from 'react' 
 
 
-import Layout from '../../Components/Layout/Layout'
+//import Layout from '../../Components/Layout/Layout'
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 function SignUp() {
   return (
-    <Layout>
+    <>
         <section>
       <div className="grid grid-cols-1 lg:grid-cols-2 mt-4 mb-4">
         <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
@@ -125,7 +125,7 @@ function SignUp() {
         </div>
       </div>
     </section>
-    </Layout>
+    </>
   )
 }
 
