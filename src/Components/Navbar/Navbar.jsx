@@ -6,7 +6,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
 import { useState } from "react";
 
-function Navbar() {
+function Navbar({cart}) {
 
     const [isOpen,setIsOpen] = useState(false);
 
@@ -83,8 +83,16 @@ function Navbar() {
               </button>
               </Link>
               <Link to="/cart">
-                <FaShoppingCart size={30} />
-              </Link>
+  <div className="relative flex flex-row justify-end">
+    <FaShoppingCart size={30} />
+
+    {/* Absolute positioned span for the cart count */}
+    <span className="absolute top-0 right-0 bg-red-500 text-white w-2 h-2 px-2 py-2 flex items-center justify-center rounded-full">
+      {cart.length}
+    </span>
+  </div>
+</Link>
+
               {
                 isOpen===false &&(
                     <div className="md:hidden" onClick={()=>setIsOpen(true)}>
