@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import './App.css'
 import Home from './Pages/Home/Home'
@@ -9,6 +9,11 @@ import Login from './Pages/Login/Login'
 import SignUp from './Pages/SignUp/SignUp'
 import Navbar from './Components/Navbar/Navbar'
 import Footer from './Components/Footer/Footer'
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from './Firebase/firebase'
 function App() {
  
 
@@ -18,6 +23,8 @@ function App() {
 
   const [discount,setDiscount] = useState(0);
   const [matched,setMatched] = useState(false);
+  const [userName,setUserName] = useState("");
+
 
   const AddToCart =(product)=>{
 
@@ -80,10 +87,21 @@ function App() {
     }
   }
 
+  useEffect(()=>{
+    auth.onAuthStateChanged((user)=>{
+      if(user){
+        setUserName(user.displayName);
+      }
+      else{
+        setUserName("")
+      }
+    });
+  },[])
+
   return (
     <>
     <BrowserRouter>
-    <Navbar cart = {cart} />
+    <Navbar cart = {cart} userName={userName}/>
     <Routes>
       <Route path='/' element={<Home/>} />
       
@@ -101,6 +119,7 @@ function App() {
       <Route path='/login' element={<Login/>} />
       <Route path='/signup' element={<SignUp/>} />
     </Routes>
+    <ToastContainer />
       <Footer/>
     </BrowserRouter>
      

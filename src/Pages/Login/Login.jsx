@@ -1,8 +1,51 @@
-import React from 'react'
+import React , { useState } from 'react'
 //import Layout from '../../Components/Layout/Layout'
 import { ArrowRight } from 'lucide-react'
-import { Link } from 'react-router-dom'
+
+
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../../Firebase/firebase";
 function Login() {
+
+
+  const navigate = useNavigate();
+
+  const [userSignUp, setUserSignUp] = useState({
+    
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    //console.log(e.target.value)
+    setUserSignUp({ ...userSignUp, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if ( !userSignUp.email || !userSignUp.password) {
+      return toast.error("All fields are required");
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        userSignUp.email,
+        userSignUp.password
+      )
+        .then(async(res) => {
+          // const user =res.user
+          // await updateProfile(user,{
+          //   displayName:userSignUp.username
+          // });
+          navigate("/")
+        }
+        )
+        .catch((err) => toast.error(err.message));
+    }
+  };
+
+
   return (
     <>
        <section>
@@ -121,8 +164,12 @@ function Login() {
                     <input
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                       type="email"
+                      name="email"
                       placeholder="Email"
-                    ></input>
+                      id="email"
+                      value={userSignUp.email}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
                 <div>
@@ -144,14 +191,19 @@ function Login() {
                     <input
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                       type="password"
-                      placeholder="Password"
-                    ></input>
+                        name="password"
+                        placeholder="Password"
+                        id="password"
+                        value={userSignUp.password}
+                        onChange={handleChange}
+                    />
                   </div>
                 </div>
                 <div>
                   <button
                     type="button"
                     className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
+                    onClick={handleSubmit}
                   >
                     Get started <ArrowRight className="ml-2" size={16} />
                   </button>

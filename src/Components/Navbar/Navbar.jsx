@@ -6,7 +6,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
 import { useState } from "react";
 
-function Navbar({cart}) {
+function Navbar({cart,userName}) {
 
     const [isOpen,setIsOpen] = useState(false);
 
@@ -81,6 +81,7 @@ function Navbar({cart}) {
               <button className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base  md:mt-0">
                 Login
               </button>
+              <span>{userName}</span>
               </Link>
               <Link to="/cart">
   <div className="relative flex flex-row justify-end">

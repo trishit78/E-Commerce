@@ -14,6 +14,7 @@ function AllProducts({AddToCart}) {
 
   const [all,setAll] = useState([]);
   const [showAllProducts,setShowAllProducts] = useState(true);
+  const [searchItem,setSearchItem] = useState("");
 
 
     useEffect(()=>{
@@ -55,6 +56,15 @@ function AllProducts({AddToCart}) {
         setShowAllProducts(false);
   }
 
+  const handleSearch = (e)=>{
+    
+    const q =e.target.value;
+    setSearchItem(q);
+    const searchProduct = allProducts.filter((searchFilterProduct)=>(
+      searchFilterProduct.title.toLowerCase().includes(searchItem.toLowerCase())
+    ))
+    setAllProducts(searchProduct)
+  }
 
   return (
     <>
@@ -71,34 +81,23 @@ function AllProducts({AddToCart}) {
           </h2>
         </div>
 
-        {/* <div className="flex gap-3 flex-wrap">
-            <select  onChange={(e)=>filterProduct(e.target.value)}>
-                <option >
-                    Filter By Category
-                </option>
-            
-          {allProducts.map((allProduct, index) => (
-            // <div className="" key={index}>
-              {/* <button className="border bg-black text-white px-2 py-2 mt-5" onClick={()=>filterProduct(allProduct)} > 
-                <option value={allProduct}>
-
-                {allProduct}
-                </option>
-              {/* </button> 
-            {/* </div> 
-          ))}
-        </select>
-        </div> */}
+       
 
 <div className="flex gap-3 flex-wrap justify-center">
   <select onChange={(e) => filterProduct(e.target.value)}>
     <option value="">Filter By Category</option>
     {allProducts.map((allProduct, index) => (
       <option key={index} value={allProduct.id}>
-        {allProduct} {/* Assuming 'name' is the property representing the category */}
+        {allProduct} 
       </option>
     ))}
   </select>
+</div>
+
+<div className="text-center mt-3 ">
+  <input type="text" placeholder="search item" className="border-4 px-4 py-2"
+    onChange={handleSearch}
+  />
 </div>
 
         <div className="flex">
