@@ -2,12 +2,21 @@ import React from "react";
 
 //import Layout from '../../Components/Layout/Layout'
 import { Link } from "react-router-dom";
+import ModalSection from "../../Components/Modal/Modal";
+import CartEmpty from "../../Components/CartEmpty/CartEmpty";
+
 function Cart({ cart, handleDec, handleInc, handleRemove, getTotalPrice,applyPromo,promocode,setPromocode ,setMatched,matched}) {
+
+  console.log(cart.length)
 
   return (
     <>
       <>
-        <body className="bg-gray-100">
+      {
+        !cart.length ?(
+          <CartEmpty/>
+        ) :(
+          <body className="bg-gray-100">
           <div className="container mx-auto mt-10">
             <div className="flex shadow-md my-10">
               <div className="w-3/4 bg-white px-10 py-10">
@@ -154,14 +163,17 @@ function Cart({ cart, handleDec, handleInc, handleRemove, getTotalPrice,applyPro
                     <span>Total cost</span>
                     <span>{getTotalPrice()}</span>
                   </div>
-                  <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
-                    Checkout
-                  </button>
+                  
+                    <ModalSection />
+                  
                 </div>
               </div>
             </div>
           </div>
         </body>
+        )
+      }
+        
       </>
     </>
   );

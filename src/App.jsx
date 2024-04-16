@@ -10,6 +10,7 @@ import SignUp from './Pages/SignUp/SignUp'
 import Navbar from './Components/Navbar/Navbar'
 import Footer from './Components/Footer/Footer'
 import { ToastContainer, toast } from 'react-toastify';
+import SingleProduct from './Components/SingleProduct/SingleProduct'
 
 import 'react-toastify/dist/ReactToastify.css';
 import { onAuthStateChanged } from 'firebase/auth'
@@ -115,9 +116,9 @@ function App() {
       />} />
       
       <Route path='/allproducts' element={<AllProducts AddToCart={AddToCart}/>} />
-      
       <Route path='/login' element={<Login/>} />
       <Route path='/signup' element={<SignUp/>} />
+      <Route path='/singleProduct' element={<SingleProduct/>} />
     </Routes>
     <ToastContainer />
       <Footer/>

@@ -3,11 +3,13 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function AllProducts({AddToCart}) {
   //'https://dummyjson.com/products/categories'
 
 //   https://dummyjson.com/products
+       const navigate = useNavigate();
 
   const [allProducts, setAllProducts] = useState([]);
   const [selectProduct,setSelectProduct] = useState("");
@@ -75,7 +77,7 @@ function AllProducts({AddToCart}) {
             className="h-full object-contain w-full"
             alt=""
           />
-          <div className="w-full h-[126px] md:h-[390px] bg-black absolute top-0 left-0 opacity-[0.5] mt-[73px]" />
+          <div className="w-full h-[126px] md:h-[318px] bg-black absolute top-0 left-0 opacity-[0.5] mt-[73px]" />
           <h2 className="absolute top-[15%] md:top-[50%] left-[10%] text-white font-semibold text-3xl md:text-6xl">
             All Products
           </h2>
@@ -105,14 +107,17 @@ function AllProducts({AddToCart}) {
             <section className="text-gray-600 body-font " key={index}>
               <div className="container px-5 py-24 mx-auto">
                 <div className="flex flex-wrap -m-4">
+                   
                   <div className="  p-4 w-full">
-                    <a className="block relative h-48 rounded overflow-hidden">
-                      <img
-                        alt="ecommerce"
-                        className="object-cover object-center w-full h-full block"
-                        src={item.thumbnail}
-                      />
-                    </a>
+                  <div className="block relative h-48 rounded overflow-hidden" onClick={() => navigate('/singleProduct')}>
+  <img
+    alt="ecommerce"
+    className="object-cover object-center w-full h-full block"
+    src={item.thumbnail}
+  />
+</div>
+
+                    
                     <div className="mt-4">
                       <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
                         Title : {item.title}
@@ -128,7 +133,9 @@ function AllProducts({AddToCart}) {
                       </button>
                      
                     </div>
+                  
                   </div>
+                  
                 </div>
               </div>
             </section>
