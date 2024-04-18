@@ -81,7 +81,8 @@ function Cart({ cart, handleDec, handleInc, handleRemove, getTotalPrice,applyPro
                       {cartItem.price}
                     </span>
                     <span className="text-center w-1/5 font-semibold text-sm">
-                      {cartItem.price * cartItem.quantity}
+                      {cartItem.price * cartItem.quantity} 
+                      
                     </span>
                   </div>
                 ))}
@@ -113,6 +114,7 @@ function Cart({ cart, handleDec, handleInc, handleRemove, getTotalPrice,applyPro
                   </span>
                   <span className="font-semibold text-sm">
                     {getTotalPrice()}
+                    
                   </span>
                 </div>
                 <div>
@@ -164,7 +166,7 @@ function Cart({ cart, handleDec, handleInc, handleRemove, getTotalPrice,applyPro
                     <span>{getTotalPrice()}</span>
                   </div>
                   
-                    <ModalSection />
+                    <ModalSection  price={getTotalPrice()} />
                   
                 </div>
               </div>

@@ -2,7 +2,68 @@ import React from 'react'
 import { Button, Checkbox, Label, Modal, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { toast } from 'react-toastify';
-function ModalSection() {
+import axios from 'axios'
+function ModalSection({price}) {
+  
+  const handleCheckoutAndOrder = (e) => {
+    e.preventDefault();
+    checkoutHandler(); // Call checkoutHandler
+    handleOrder(e); // Call handleOrder
+  };
+  
+
+  const checkoutHandler = async (id) => {
+    const res = await axios.get("https://checkout.razorpay.com/v1/checkout.js");
+
+    if (!res) {
+      alert("You are offline! Failed to load...");
+    }
+
+    var options = {
+      key: "rzp_test_1sh4xAWBK0C6e5", // Enter the Key ID generated from the Dashboard
+      amount: price* 100,
+      currency: "INR",
+      name: "FitClub",
+      description: "Thank you so much for helping",
+      image: "https://s3.amazonaws.com/rzp-mobile/images/rzp.jpg",
+      prefill: {
+        email: "trishit456@gmail.com",
+        contact: +919477704221,
+      },
+
+      handler: function (response) {
+        
+        //console.log(response);
+        setAmt(null);
+       
+      },
+    };
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
+
+
+  const handleOrder = (e)=>{
+    e.preventDefault();
+    if(!orderDetails.fullName ||
+        !orderDetails.address ||
+        !orderDetails.mobile ||
+        !orderDetails.pinCode
+        )
+        return toast.error("Please fill all the fields")
+    else{
+        //toast.success("order successfull")
+        onCloseModal()
+    }
+  }
+
+
+
+
+
+
+
+
 
     const [openModal, setOpenModal] = useState(false);
   const [orderDetails,setOrderDetails] = useState({
@@ -17,22 +78,10 @@ function ModalSection() {
       ...orderDetails,
       [e.target.name]: e.target.value
     });
-    console.log(orderDetails)
+   // console.log(orderDetails)
   };
 
-  const handleOrder = (e)=>{
-    e.preventDefault();
-    if(!orderDetails.fullName ||
-        !orderDetails.address ||
-        !orderDetails.mobile ||
-        !orderDetails.pinCode
-        )
-        return toast.error("Please fill all the fields")
-    else{
-        toast.success("order successfull")
-        onCloseModal()
-    }
-  }
+  
   
 
   function onCloseModal() {
@@ -73,7 +122,7 @@ function ModalSection() {
                 
                 name='address'
                 value={orderDetails.address}
-                onChange={handleChange}
+                onChange={handleChange }
                 required
               />
             </div>
@@ -105,10 +154,10 @@ function ModalSection() {
             </div>
 
             <div className="w-full">
-              <Button className='w-full'
-              onClick={handleOrder}
-              > Order Now</Button>
-            </div>
+  <Button className='w-full' onClick={handleCheckoutAndOrder}>
+    Order Now
+  </Button>
+</div>
             
           </div>
         </Modal.Body>
