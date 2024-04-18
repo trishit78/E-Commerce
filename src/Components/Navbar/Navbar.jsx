@@ -56,6 +56,7 @@ function Navbar({cart,userName}) {
                 </Link>
               <li className="mr-5 hover:text-gray-900 cursor-pointer">Mens</li>
               <li className="mr-5 hover:text-gray-900 cursor-pointer">Kids</li>
+              <li className="mr-5 hover:text-gray-900 cursor-pointer">Sports</li>
             </ul>
             </div>
 {
